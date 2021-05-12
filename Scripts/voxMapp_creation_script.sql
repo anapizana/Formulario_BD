@@ -1,13 +1,27 @@
 --
+--TABLE: tipo_hospital
+--
+CREATE TYPE tipo_hospital AS ENUM (
+	'distrital',
+	'regional',
+	'municipal'
+);
+
+
+--
 -- TABLE: id_hospital
 -- 
 CREATE TABLE Hospital (
   id_hospital numeric(5,0) constraint pk_Hospital primary key,
   nombre varchar(100) not null,
-  dirección varchar(100) NOT null, 
-  latitud numeric(8,6) not null,
-  longitud numeric(9,6) not null,
-  telefono_fijo varchar(100) not null
+  direcciÃ³n varchar(100) NOT null, 
+  "latitud" double precision not null,
+  "longitud" double precision not null,
+  "altitud" double precision not null,
+  "district" varchar(50) not null,
+  "type" typo_hospital not null,	
+  telefono_fijo varchar(100) not null,
+  "MOPH_number" numeric(5,0) not null
   );
 --tipo_fondo falta
 CREATE SEQUENCE Hospital_id_hospital_seq START 1 INCREMENT 1 ;
@@ -38,7 +52,7 @@ CREATE SEQUENCE Catalogo_Problemas_id_problema_seq START 1 INCREMENT 1 ;
 ALTER TABLE Catalogo_Problemas ALTER COLUMN id_problema SET DEFAULT nextval('Catalogo_Problemas_id_problema_seq');
 
 --
---CATALOGO: Acción
+--CATALOGO: AcciÃ³n
 --
 create table Catalogo_Accion(
 	id_accion numeric(2,0) constraint pk_catalogo_accion primary key,
@@ -71,7 +85,7 @@ create table Hospital_Contact(
 );
 
 /*
- * La razón de tener rango varchar es que VM intenta tener 3 profesionoistas diferentes por hospital, primero se intenta encuestar a directores, luego doctores y luego enfermeras
+ * La razÃ³n de tener rango varchar es que VM intenta tener 3 profesionoistas diferentes por hospital, primero se intenta encuestar a directores, luego doctores y luego enfermeras
  */
 
 CREATE SEQUENCE Hospital_Contact_id_contact_seq START 1 INCREMENT 1 ;
